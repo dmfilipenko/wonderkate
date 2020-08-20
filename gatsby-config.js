@@ -3,7 +3,7 @@ require('dotenv').config()
 module.exports = {
   siteMetadata: {
     title: 'Sotnychenko Kateryna | Personal Portfolio',
-
+    description: '',
     keywords: 'design, ui/ux',
     siteUrl: 'https://sotnychenko.com',
     author: {

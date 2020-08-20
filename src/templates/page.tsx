@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import Img from 'gatsby-image'
 import IndexLayout from '../layouts'
+import ScrollArrow from '../components/BackToTop'
 
 const Container = styled.div`
   position: relative;
@@ -20,9 +21,10 @@ const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => {
   return (
     <IndexLayout>
       <Container>
-        {data.datoCmsWork.listOfImages.map(e => (
+        {data.datoCmsWork.listOfImages?.map(e => (
           <Img fluid={e.fluid} alt="" />
         ))}
+        <ScrollArrow />
       </Container>
     </IndexLayout>
   )

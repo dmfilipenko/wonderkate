@@ -4,6 +4,7 @@ import { graphql } from 'gatsby'
 import styled from '@emotion/styled'
 import Page from '../components/Page'
 import IndexLayout from '../layouts'
+import { dimensions } from '../styles/variables'
 
 interface IndexProps {
   data: {
@@ -16,7 +17,7 @@ interface IndexProps {
 const Container = styled.div`
   white-space: pre-line;
   max-width: 800px;
-  font-size: 21px;
+  font-size: ${dimensions.fontSize.xlarge}px;
   font-style: normal;
   letter-spacing: 1.6px;
 `

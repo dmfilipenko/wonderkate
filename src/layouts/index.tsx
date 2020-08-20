@@ -1,7 +1,8 @@
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
-import { Global, css } from '@emotion/core'
+
+import { color } from 'styled-system'
 import styled from '@emotion/styled'
 import Header from '../components/Header'
 import LayoutRoot from '../components/LayoutRoot'
@@ -36,6 +37,19 @@ interface StaticQueryProps {
     }
   }
 }
+
+const ContainerContent = styled.div`
+  ${color};
+  color: white;
+
+  a {
+    color: white;
+    text-decoration: underline;
+    &:hover {
+      color: ${props => props.linkColor};
+    }
+  }
+`
 
 const IndexLayout: React.FC = ({ children }) => (
   <StaticQuery
@@ -80,7 +94,9 @@ const IndexLayout: React.FC = ({ children }) => (
 
           <LayoutMain>
             <Header title={data.site.siteMetadata.title} colors={data.datoCmsColor} />
-            {children}
+            <ContainerContent bg={data.datoCmsColor.title.hex} linkColor={data.datoCmsColor.myWork.hex}>
+              {children}
+            </ContainerContent>
             <Menu menuItems={data.allDatoCmsWork.edges} colors={data.datoCmsColor} />
           </LayoutMain>
         </LayoutRoot>

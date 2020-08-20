@@ -1,9 +1,12 @@
+/* eslint-disable react/no-array-index-key */
 import * as React from 'react'
 import styled from '@emotion/styled'
 import { transparentize } from 'polished'
 import { Link } from 'gatsby'
 
 import { typography, space, border, color, ColorProps, SpaceProps } from 'styled-system'
+import { dimensions } from '../styles/variables'
+import { getPathName } from '../utils'
 
 interface HeaderProps {
   menuItems: {
@@ -23,33 +26,31 @@ interface HeaderProps {
 }
 
 const MenuItem = styled.div`
-  padding: 20px 30px;
-  font-size: 21px;
-
-  border-bottom: 4px solid ${props => props.color};
   ${color};
+  padding: 20px 30px;
+  font-size: ${dimensions.fontSize.large}px;
+  border-bottom: ${dimensions.border}px solid ${props => props.color};
+
   a {
     text-decoration: none;
     transition: 0.3s color, border 0.3s;
-    color: #000;
-    border-bottom: 4px solid transparent;
+    color: ${props => (props.active ? props.color : '#000')};
     &:hover {
       color: ${props => props.color};
-      border-bottom: 4px solid currentColor;
     }
   }
 `
 
 const MenuContainer = styled.div`
   ${color};
-  border-left: 4px solid currentColor;
+  border-left: ${dimensions.border}px solid currentColor;
 `
 
 const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => (
   <MenuContainer color={colors.myWork.hex}>
-    {menuItems.map(e => (
-      <MenuItem color={colors.myWork.hex}>
-        <a href={`/${e.node.url}`}>{e.node.title}</a>
+    {menuItems.map((e, idx) => (
+      <MenuItem key={idx} color={colors.myWork.hex} active={getPathName() === `/${e.node.url}`}>
+        <a href={`/${e.node.url} `}>{e.node.title}</a>
       </MenuItem>
     ))}
   </MenuContainer>

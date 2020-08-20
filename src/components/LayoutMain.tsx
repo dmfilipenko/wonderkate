@@ -4,7 +4,7 @@ import styled from '@emotion/styled'
 const StyledLayoutMain = styled.main`
   display: grid;
   height: 100%;
-  grid-template-rows: 100px auto;
+  grid-template-rows: 150px auto;
   grid-template-columns: auto 30%;
   grid-template-areas:
     'title my-work'

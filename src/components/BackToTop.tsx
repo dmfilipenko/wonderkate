@@ -19,18 +19,20 @@ const BackToTop = () => {
   const [showScroll, setShowScroll] = useState(false)
 
   const checkScrollTop = () => {
-    if (!showScroll && window.pageYOffset > 300) {
+    if (!showScroll && window?.pageYOffset > 300) {
       setShowScroll(true)
-    } else if (showScroll && window.pageYOffset <= 300) {
+    } else if (showScroll && window?.pageYOffset <= 300) {
       setShowScroll(false)
     }
   }
 
   const scrollTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // eslint-disable-next-line no-unused-expressions
+    window?.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
-  window.addEventListener('scroll', checkScrollTop)
+  // eslint-disable-next-line no-unused-expressions
+  window?.addEventListener('scroll', checkScrollTop)
 
   return <Arrow type="button" className="scrollTop" onClick={scrollTop} style={{ display: showScroll ? 'flex' : 'none' }} />
 }

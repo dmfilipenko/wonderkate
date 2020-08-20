@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
 const Arrow = styled.button`
@@ -30,9 +30,13 @@ const BackToTop = () => {
     // eslint-disable-next-line no-unused-expressions
     window?.scrollTo({ top: 0, behavior: 'smooth' })
   }
-
-  // eslint-disable-next-line no-unused-expressions
-  window?.addEventListener('scroll', checkScrollTop)
+  useEffect(() => {
+    // eslint-disable-next-line no-unused-expressions
+    window?.addEventListener('scroll', checkScrollTop)
+    return () => {
+      window.removeEventListener('scroll', checkScrollTop)
+    }
+  }, [])
 
   return <Arrow type="button" className="scrollTop" onClick={scrollTop} style={{ display: showScroll ? 'flex' : 'none' }} />
 }

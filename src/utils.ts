@@ -2,5 +2,5 @@ export const getPathName = () => (typeof window !== 'undefined' ? window.locatio
 
 export const isMain = () => {
   const pathname = getPathName()
-  return pathname !== '/'
+  return pathname === '/'
 }

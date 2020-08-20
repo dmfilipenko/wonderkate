@@ -66,20 +66,21 @@ interface HeaderProps {
 const HeaderTitle = ({ title, colors }: { title: string, colors: HeaderProps['colors'] }) => {
   return <ComponentOnCondition conditions={[
     [isMain(), (
-      <HomepageLink to="/" color="white">
-        {title}
-      </HomepageLink>
+      <HomeTitle color={colors.myWork.hex}>{title}</HomeTitle>
+
     )],
-    [true, <HomeTitle color={colors.myWork.hex}>{title}</HomeTitle>]
+    [true, <HomepageLink to="/" color="white">
+      {title}
+    </HomepageLink>]
   ]} />
 }
 
 const Header: React.FC<HeaderProps> = ({ colors }) => {
-  const bg = !isMain() ? 'white' : 'black'
+  const bg = isMain() ? 'white' : 'black'
   return (
     <>
       <StyledHeader bg={bg}>
-        <HeaderInner bg={bg}>
+        <HeaderInner>
           <HeaderTitle title="Kateryna Sotnychenko" colors={colors} />
         </HeaderInner>
       </StyledHeader>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 
-const Arrow = styled.button`
+const Arrow = styled.button<{ show: boolean }>`
   border: solid black;
   border-width: 0 5px 5px 0;
   padding: 10px;
@@ -11,6 +11,7 @@ const Arrow = styled.button`
   right: calc(30% + 10px);
   bottom: 20px;
   background: transparent;
+  display: ${props => (props.show ? 'block' : 'none')};
   &:hover {
     cursor: pointer;
   }
@@ -19,9 +20,9 @@ const BackToTop = () => {
   const [showScroll, setShowScroll] = useState(false)
 
   const checkScrollTop = () => {
-    if (!showScroll && window?.pageYOffset > 300) {
+    if (window?.pageYOffset > 300) {
       setShowScroll(true)
-    } else if (showScroll && window?.pageYOffset <= 300) {
+    } else if (window?.pageYOffset <= 300) {
       setShowScroll(false)
     }
   }
@@ -38,7 +39,7 @@ const BackToTop = () => {
     }
   }, [])
 
-  return <Arrow type="button" className="scrollTop" onClick={scrollTop} style={{ display: showScroll ? 'flex' : 'none' }} />
+  return <Arrow type="button" className="scrollTop" onClick={scrollTop} show={showScroll} />
 }
 
 export default BackToTop

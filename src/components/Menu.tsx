@@ -46,14 +46,17 @@ const MenuContainer = styled.div`
   border-left: ${dimensions.border}px solid currentColor;
 `
 
-const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => (
-  <MenuContainer color={colors.myWork.hex}>
-    {menuItems.map((e, idx) => (
-      <MenuItem key={idx} color={colors.myWork.hex} active={getPathName() === `/${e.node.url}`}>
-        <a href={`/${e.node.url} `}>{e.node.title}</a>
-      </MenuItem>
-    ))}
-  </MenuContainer>
-)
+const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => {
+  console.log(menuItems)
+  return (
+    <MenuContainer color={colors.myWork.hex}>
+      {menuItems.map((e, idx) => (
+        <MenuItem key={idx} color={colors.myWork.hex} active={getPathName().includes(e.node.url)}>
+          <a href={`/${e.node.url}`}>{e.node.title}</a>
+        </MenuItem>
+      ))}
+    </MenuContainer>
+  )
+}
 
 export default Menu

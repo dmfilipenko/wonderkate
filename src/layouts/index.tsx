@@ -1,11 +1,15 @@
 import * as React from 'react'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import { Global, css } from '@emotion/core'
+import styled from '@emotion/styled'
 import Header from '../components/Header'
 import LayoutRoot from '../components/LayoutRoot'
 import LayoutMain from '../components/LayoutMain'
+
 import 'modern-normalize'
 import '../styles/normalize'
+import Menu from '../components/Menu'
 
 interface StaticQueryProps {
   site: {
@@ -13,6 +17,22 @@ interface StaticQueryProps {
       title: string
       description: string
       keywords: string
+    }
+  }
+  allDatoCmsWork: {
+    edges: {
+      node: {
+        title: string
+        url: string
+      }
+    }[]
+  }
+  datoCmsColor: {
+    title: {
+      hex: string
+    }
+    myWork: {
+      hex: string
     }
   }
 }
@@ -27,21 +47,45 @@ const IndexLayout: React.FC = ({ children }) => (
             description
           }
         }
+        allDatoCmsWork(sort: { fields: positionValue }) {
+          edges {
+            node {
+              title
+              url
+            }
+          }
+        }
+        datoCmsColor {
+          title {
+            hex
+          }
+          myWork {
+            hex
+          }
+        }
       }
     `}
-    render={(data: StaticQueryProps) => (
-      <LayoutRoot>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: data.site.siteMetadata.description },
-            { name: 'keywords', content: data.site.siteMetadata.keywords }
-          ]}
-        />
-        <Header title={data.site.siteMetadata.title} />
-        <LayoutMain>{children}</LayoutMain>
-      </LayoutRoot>
-    )}
+    render={(data: StaticQueryProps) => {
+      return (
+        <LayoutRoot>
+          <Helmet
+            title={data.site.siteMetadata.title}
+            meta={[
+              { name: 'description', content: data.site.siteMetadata.description },
+              { name: 'keywords', content: data.site.siteMetadata.keywords }
+            ]}
+          >
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
+          </Helmet>
+
+          <LayoutMain>
+            <Header title={data.site.siteMetadata.title} colors={data.datoCmsColor} />
+            {children}
+            <Menu menuItems={data.allDatoCmsWork.edges} colors={data.datoCmsColor} />
+          </LayoutMain>
+        </LayoutRoot>
+      )
+    }}
   />
 )
 

@@ -21,14 +21,13 @@ exports.createPages = ({ graphql, actions }) => {
         }
       }
     `).then(result => {
-      console.log(result.data.allDatoCmsWork.edges)
       result.data.allDatoCmsWork.edges.forEach(({ node: { url } }) => {
         createPage({
           path: `${url}`,
-          component: path.resolve(`./src/templates/page.tsx`)
-          // context: {
-          //   slug: work.slug
-          // }
+          component: path.resolve(`./src/templates/page.tsx`),
+          context: {
+            url
+          }
         })
       })
 

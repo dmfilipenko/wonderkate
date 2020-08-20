@@ -1,35 +1,43 @@
 import * as React from 'react'
 import { graphql } from 'gatsby'
 
-import Page from '../components/Page'
-import Container from '../components/Container'
+import styled from '@emotion/styled'
+import Img from 'gatsby-image'
 import IndexLayout from '../layouts'
 
+const Container = styled.div`
+  position: relative;
+`
 interface PageTemplateProps {
   data: {
-    portfolioitem: {
-      slug: string
+    datoCmsWork: {
+      listOfImages: any[]
     }
   }
 }
 
-const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => (
-  <IndexLayout>
-    <Page>
+const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => {
+  return (
+    <IndexLayout>
       <Container>
-        some text
-        {/* <h1>{data.markdownRemark.frontmatter.title}</h1> */}
-        {/* eslint-disable-next-line react/no-danger */}
-        {/* <div dangerouslySetInnerHTML={{ __html: data.markdownRemark.html }} /> */}
+        {data.datoCmsWork.listOfImages.map(e => (
+          <Img fluid={e.fluid} alt="" />
+        ))}
       </Container>
-    </Page>
-  </IndexLayout>
-)
-
+    </IndexLayout>
+  )
+}
 export default PageTemplate
 
-// export const query = graphql`
-//   query MyQuery {
-//     works
-//   }
-// `
+export const query = graphql`
+  query WorksQuery($url: String!) {
+    datoCmsWork(url: { eq: $url }) {
+      url
+      listOfImages {
+        fluid(imgixParams: { fm: "jpg", auto: "compress" }) {
+          ...GatsbyDatoCmsFluid_tracedSVG
+        }
+      }
+    }
+  }
+`

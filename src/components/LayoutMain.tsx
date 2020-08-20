@@ -2,9 +2,13 @@ import * as React from 'react'
 import styled from '@emotion/styled'
 
 const StyledLayoutMain = styled.main`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  display: grid;
+  height: 100%;
+  grid-template-rows: 100px auto;
+  grid-template-columns: auto 30%;
+  grid-template-areas:
+    'title my-work'
+    'content work-link';
 `
 
 interface LayoutMainProps {

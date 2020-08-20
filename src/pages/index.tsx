@@ -1,21 +1,42 @@
 import * as React from 'react'
-import { Link } from 'gatsby'
+import { graphql } from 'gatsby'
 
+import styled from '@emotion/styled'
 import Page from '../components/Page'
-import Container from '../components/Container'
 import IndexLayout from '../layouts'
 
-const IndexPage = () => (
-  <IndexLayout>
-    <Page>
-      <Container>
-        <h1>Hi people</h1>
-        <p>Welcome to your new Gatsby site.</p>
-        <p>Now go build something great.</p>
-        <Link to="/my-first-work/">Go to page 2</Link>
-      </Container>
-    </Page>
-  </IndexLayout>
-)
+interface IndexProps {
+  data: {
+    datoCmsHome: {
+      introText: string
+    }
+  }
+}
+
+const Container = styled.div`
+  white-space: pre-line;
+  max-width: 800px;
+  font-size: 21px;
+  font-style: normal;
+  letter-spacing: 1.6px;
+`
+
+const IndexPage = ({ data }: IndexProps) => {
+  return (
+    <IndexLayout>
+      <Page>
+        <Container dangerouslySetInnerHTML={{ __html: data.datoCmsHome.introText }} />
+      </Page>
+    </IndexLayout>
+  )
+}
 
 export default IndexPage
+
+export const query = graphql`
+  query MyQuery {
+    datoCmsHome {
+      introText
+    }
+  }
+`

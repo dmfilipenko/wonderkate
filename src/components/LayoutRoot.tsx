@@ -1,13 +1,7 @@
 import * as React from 'react'
 import { Global, css } from '@emotion/core'
-import styled from '@emotion/styled'
-import normalize from '../styles/normalize'
 
-const StyledLayoutRoot = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`
+import normalize from '../styles/normalize'
 
 interface LayoutRootProps {
   className?: string
@@ -16,7 +10,21 @@ interface LayoutRootProps {
 const LayoutRoot: React.FC<LayoutRootProps> = ({ children, className }) => (
   <>
     <Global styles={() => css(normalize)} />
-    <StyledLayoutRoot className={className}>{children}</StyledLayoutRoot>
+    <Global
+      styles={css`
+        html,
+        body {
+          font-family: 'Poppins', sans-serif;
+        }
+        html,
+        body,
+        #___gatsby,
+        #gatsby-focus-wrapper {
+          height: 100%;
+        }
+      `}
+    />
+    {children}
   </>
 )
 

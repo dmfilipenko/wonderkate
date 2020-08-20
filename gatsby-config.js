@@ -1,16 +1,15 @@
 require('dotenv').config()
 
-console.log(process.env.DATO_API_TOKEN)
 module.exports = {
   siteMetadata: {
-    title: 'gatsby-starter-typescript-plus',
-    description: 'A starter kit for TypeScript-based Gatsby projects with sensible defaults.',
-    keywords: 'gatsbyjs, gatsby, javascript, sample, something',
-    siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com',
+    title: 'Sotnychenko Kateryna | Personal Portfolio',
+
+    keywords: 'design, ui/ux',
+    siteUrl: 'https://sotnychenko.com',
     author: {
-      name: 'Resi Respati',
-      url: 'https://twitter.com/resir014',
-      email: 'resir014@gmail.com'
+      // name: 'Resi Respati',
+      // url: 'https://twitter.com/resir014',
+      // email: 'resir014@gmail.com'
     }
   },
   plugins: [
@@ -45,7 +44,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-canonical-urls',
       options: {
-        siteUrl: 'https://gatsby-starter-typescript-plus.netlify.com'
+        siteUrl: 'https://sotnychenko.com'
       }
     },
     'gatsby-plugin-emotion',

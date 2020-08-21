@@ -14,6 +14,17 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-43893302-2',
+        head: false,
+        anonymize: false,
+        respectDNT: true,
+        pageTransitionDelay: 0,
+        defer: false
+      }
+    },
+    {
       resolve: `gatsby-source-datocms`,
       options: {
         // You can find your read-only API token under the Settings > API tokens

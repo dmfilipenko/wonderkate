@@ -4,10 +4,8 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import { color } from 'styled-system'
 import styled from '@emotion/styled'
-import Header from '../components/Header'
 import LayoutRoot from '../components/LayoutRoot'
 import LayoutMain from '../components/LayoutMain'
-
 import 'modern-normalize'
 import '../styles/normalize'
 import Menu from '../components/Menu'

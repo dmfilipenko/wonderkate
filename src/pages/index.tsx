@@ -2,6 +2,7 @@ import * as React from 'react'
 import { graphql } from 'gatsby'
 
 import styled from '@emotion/styled'
+
 import Page from '../components/Page'
 import IndexLayout from '../layouts'
 import { dimensions } from '../styles/variables'

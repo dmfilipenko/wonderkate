@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 
 import styled from '@emotion/styled'
 import Img from 'gatsby-image'
+
 import IndexLayout from '../layouts'
 import ScrollArrow from '../components/BackToTop'
 import Header from '../components/Header'

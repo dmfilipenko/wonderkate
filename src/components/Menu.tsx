@@ -1,12 +1,10 @@
 /* eslint-disable react/no-array-index-key */
-import * as React from 'react'
 import styled from '@emotion/styled'
-import { transparentize } from 'polished'
 import { Link } from 'gatsby'
-
-import { typography, space, border, color, ColorProps, SpaceProps } from 'styled-system'
+import * as React from 'react'
+import { color } from 'styled-system'
 import { dimensions } from '../styles/variables'
-import { getPathName } from '../utils'
+import SocialNetworks from './SocialNetwork'
 
 interface HeaderProps {
   menuItems: {
@@ -15,6 +13,7 @@ interface HeaderProps {
       title: string
     }
   }[]
+
   colors: {
     title: {
       hex: string
@@ -25,19 +24,21 @@ interface HeaderProps {
   }
 }
 
-const MenuItem = styled.div`
+const MenuItem = styled(Link)`
   ${color};
+  display: flex;
   padding: 20px 30px;
   font-size: ${dimensions.fontSize.large}px;
   border-bottom: ${dimensions.border}px solid ${props => props.color};
-
-  a {
+  text-decoration: none;
+  transition: 0.3s color, border 0.3s;
+  color: #000;
+  &.active-link {
+    color: ${props => props.activeColor};
+  }
+  &:hover {
     text-decoration: none;
-    transition: 0.3s color, border 0.3s;
-    color: ${props => (props.active ? props.activeColor : '#000')};
-    &:hover {
-      color: ${props => props.color};
-    }
+    color: ${props => props.color};
   }
 `
 
@@ -51,11 +52,12 @@ const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => {
     <MenuContainer color={colors.myWork.hex}>
       {menuItems.map((e, idx) => {
         return (
-          <MenuItem key={idx} color={colors.myWork.hex} activeColor={colors.myWork.hex} active={getPathName().includes(e.node.url)}>
-            <a href={`/${e.node.url}`}>{e.node.title}</a>
+          <MenuItem to={`/${e.node.url}`} key={idx} color={colors.myWork.hex} activeColor={colors.myWork.hex} activeClassName="active-link">
+            {e.node.title}
           </MenuItem>
         )
       })}
+      <SocialNetworks />
     </MenuContainer>
   )
 }

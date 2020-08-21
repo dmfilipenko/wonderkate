@@ -16,6 +16,11 @@ interface PageTemplateProps {
     datoCmsWork: {
       listOfImages: any[]
     }
+    datoCmsColor: {
+      myWork: {
+        hex: string
+      }
+    }
   }
 }
 
@@ -35,7 +40,7 @@ const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => {
           {data.datoCmsWork.listOfImages?.map(e => (
             <Img fluid={e.fluid} alt="" />
           ))}
-          <ScrollArrow />
+          <ScrollArrow arrowColor={data.datoCmsColor.myWork.hex} />
         </Container>
       }
     />
@@ -54,7 +59,7 @@ export const query = graphql`
       }
     }
     datoCmsColor {
-      title {
+      myWork {
         hex
       }
     }

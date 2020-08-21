@@ -4,6 +4,7 @@ import { StaticQuery, graphql } from 'gatsby'
 
 import { color } from 'styled-system'
 import styled from '@emotion/styled'
+import { HelmetDatoCms } from 'gatsby-source-datocms'
 import LayoutRoot from '../components/LayoutRoot'
 import LayoutMain from '../components/LayoutMain'
 import 'modern-normalize'
@@ -17,6 +18,9 @@ interface StaticQueryProps {
       description: string
       keywords: string
     }
+  }
+  datoCmsSite: {
+    faviconMetaTags: any
   }
   allDatoCmsWork: {
     edges: {
@@ -59,6 +63,11 @@ const IndexLayout: React.FC<{ header?: React.ReactElement; content: React.ReactE
             description
           }
         }
+        datoCmsSite {
+          faviconMetaTags {
+            ...GatsbyDatoCmsFaviconMetaTags
+          }
+        }
         allDatoCmsWork(sort: { fields: positionValue }) {
           edges {
             node {
@@ -89,6 +98,7 @@ const IndexLayout: React.FC<{ header?: React.ReactElement; content: React.ReactE
           >
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
           </Helmet>
+          <HelmetDatoCms favicon={data.datoCmsSite.faviconMetaTags} />
           <LayoutMain>
             {header}
             <ContainerContent bg={data.datoCmsColor.title.hex} linkColor={data.datoCmsColor.myWork.hex}>

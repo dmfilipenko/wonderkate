@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import styled from '@emotion/styled'
+import { color } from 'styled-system'
 
-const Arrow = styled.button<{ show: boolean }>`
-  border: solid black;
-  border-width: 0 5px 5px 0;
+const Arrow = styled.button<{ show: boolean; arrowColor: string }>`
+  ${color}
+  border: solid ${props => props.arrowColor};
+  border-width: 0 3px 3px 0;
   padding: 10px;
   vertical-align: middle;
   transform: rotate(-135deg);
   position: fixed;
-  right: calc(30% + 10px);
+  right: calc(30% - 70px);
   bottom: 20px;
   background: transparent;
   display: ${props => (props.show ? 'block' : 'none')};
@@ -16,7 +18,7 @@ const Arrow = styled.button<{ show: boolean }>`
     cursor: pointer;
   }
 `
-const BackToTop = () => {
+const BackToTop = ({ arrowColor }: { arrowColor: string }) => {
   const [showScroll, setShowScroll] = useState(false)
 
   const checkScrollTop = () => {
@@ -39,7 +41,7 @@ const BackToTop = () => {
     }
   }, [])
 
-  return <Arrow type="button" className="scrollTop" onClick={scrollTop} show={showScroll} />
+  return <Arrow arrowColor={arrowColor} type="button" className="scrollTop" onClick={scrollTop} show={showScroll} />
 }
 
 export default BackToTop

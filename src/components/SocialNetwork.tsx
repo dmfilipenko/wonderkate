@@ -35,7 +35,7 @@ const SocialItem = styled(OutboundLink)`
 const SocialNetworks: React.FC = () => {
   const data = useStaticQuery(graphql`
     query SocialNetworks {
-      allDatoCmsSocialNetwork {
+      allDatoCmsSocialNetwork(sort: { fields: positionValue }) {
         edges {
           node {
             socialNetworkImage {

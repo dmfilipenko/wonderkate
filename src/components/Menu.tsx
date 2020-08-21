@@ -34,7 +34,7 @@ const MenuItem = styled.div`
   a {
     text-decoration: none;
     transition: 0.3s color, border 0.3s;
-    color: ${props => (props.active ? props.color : '#000')};
+    color: ${props => (props.active ? props.activeColor : '#000')};
     &:hover {
       color: ${props => props.color};
     }
@@ -47,13 +47,11 @@ const MenuContainer = styled.div`
 `
 
 const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => {
-  console.log(getPathName())
   return (
     <MenuContainer color={colors.myWork.hex}>
       {menuItems.map((e, idx) => {
-        console.log(e.node.url, getPathName().includes(e.node.url))
         return (
-          <MenuItem key={idx} color={colors.myWork.hex} active={getPathName().includes(e.node.url)}>
+          <MenuItem key={idx} color={colors.myWork.hex} activeColor={colors.myWork.hex} active={getPathName().includes(e.node.url)}>
             <a href={`/${e.node.url}`}>{e.node.title}</a>
           </MenuItem>
         )

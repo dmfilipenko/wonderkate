@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 import Img from 'gatsby-image'
 import IndexLayout from '../layouts'
 import ScrollArrow from '../components/BackToTop'
+import Header from '../components/Header'
 
 const Container = styled.div`
   position: relative;
@@ -19,14 +20,24 @@ interface PageTemplateProps {
 
 const PageTemplate: React.FC<PageTemplateProps> = ({ data }) => {
   return (
-    <IndexLayout>
-      <Container>
-        {data.datoCmsWork.listOfImages?.map(e => (
-          <Img fluid={e.fluid} alt="" />
-        ))}
-        <ScrollArrow />
-      </Container>
-    </IndexLayout>
+    <IndexLayout
+      header={
+        <Header
+          colors={{
+            headerBg: 'black',
+            headerColor: 'white'
+          }}
+        />
+      }
+      content={
+        <Container>
+          {data.datoCmsWork.listOfImages?.map(e => (
+            <Img fluid={e.fluid} alt="" />
+          ))}
+          <ScrollArrow />
+        </Container>
+      }
+    />
   )
 }
 export default PageTemplate
@@ -39,6 +50,11 @@ export const query = graphql`
         fluid(imgixParams: { fm: "jpg", auto: "compress" }) {
           ...GatsbyDatoCmsFluid_tracedSVG
         }
+      }
+    }
+    datoCmsColor {
+      title {
+        hex
       }
     }
   }

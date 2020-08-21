@@ -51,7 +51,7 @@ const ContainerContent = styled.div`
   }
 `
 
-const IndexLayout: React.FC = ({ children }) => (
+const IndexLayout: React.FC<{ header?: React.ReactElement; content: React.ReactElement }> = ({ header, content }) => (
   <StaticQuery
     query={graphql`
       query IndexLayoutQuery {
@@ -91,11 +91,10 @@ const IndexLayout: React.FC = ({ children }) => (
           >
             <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet" />
           </Helmet>
-
           <LayoutMain>
-            <Header title={data.site.siteMetadata.title} colors={data.datoCmsColor} />
+            {header}
             <ContainerContent bg={data.datoCmsColor.title.hex} linkColor={data.datoCmsColor.myWork.hex}>
-              {children}
+              {content}
             </ContainerContent>
             <Menu menuItems={data.allDatoCmsWork.edges} colors={data.datoCmsColor} />
           </LayoutMain>

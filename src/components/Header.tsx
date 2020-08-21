@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-props-no-spreading */
 import styled from '@emotion/styled'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import * as React from 'react'
 import { color } from 'styled-system'
 import { dimensions } from '../styles/variables'
@@ -52,22 +52,19 @@ const MyWork = styled.div`
 `
 
 interface HeaderProps {
-  title: string
+
   colors: {
-    title: {
-      hex: string
-    }
-    myWork: {
-      hex: string
-    }
+    headerBg: string
+    headerColor: string
   }
+
+
 }
 
-const HeaderTitle = ({ title, colors }: { title: string, colors: HeaderProps['colors'] }) => {
+const HeaderTitle = ({ title, titleColor }: { title: string, titleColor: string }) => {
   return <ComponentOnCondition conditions={[
     [isMain(), (
-      <HomeTitle color={colors.myWork.hex}>{title}</HomeTitle>
-
+      <HomeTitle color={titleColor}>{title}</HomeTitle>
     )],
     [true, <HomepageLink to="/" color="white">
       {title}
@@ -75,16 +72,30 @@ const HeaderTitle = ({ title, colors }: { title: string, colors: HeaderProps['co
   ]} />
 }
 
-const Header: React.FC<HeaderProps> = ({ colors }) => {
-  const bg = isMain() ? 'white' : 'black'
+const Header: React.FC<HeaderProps> = ({ colors: {
+  headerBg,
+  headerColor
+} }) => {
+  const data = useStaticQuery(graphql`
+    query HeaderQuery {
+      datoCmsColor {
+        title {
+          hex
+        }
+        myWork {
+          hex
+        }
+      }
+    }
+  `)
   return (
     <>
-      <StyledHeader bg={bg}>
+      <StyledHeader bg={headerBg}>
         <HeaderInner>
-          <HeaderTitle title="Kateryna Sotnychenko" colors={colors} />
+          <HeaderTitle title="Kateryna Sotnychenko" titleColor={headerColor} />
         </HeaderInner>
       </StyledHeader>
-      <MyWork bg={colors.myWork.hex}>
+      <MyWork bg={data.datoCmsColor.myWork.hex}>
         <span>My work</span>
       </MyWork>
     </>

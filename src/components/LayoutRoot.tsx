@@ -7,7 +7,7 @@ interface LayoutRootProps {
   className?: string
 }
 
-const LayoutRoot: React.FC<LayoutRootProps> = ({ children, className }) => (
+const LayoutRoot: React.FC<LayoutRootProps> = ({ children }) => (
   <>
     <Global styles={() => css(normalize)} />
     <Global

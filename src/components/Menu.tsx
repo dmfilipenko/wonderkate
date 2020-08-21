@@ -47,7 +47,6 @@ const MenuContainer = styled.div`
 `
 
 const Menu: React.FC<HeaderProps> = ({ colors, menuItems }) => {
-  console.log(menuItems)
   return (
     <MenuContainer color={colors.myWork.hex}>
       {menuItems.map((e, idx) => (

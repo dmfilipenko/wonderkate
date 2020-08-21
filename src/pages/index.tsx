@@ -5,11 +5,17 @@ import styled from '@emotion/styled'
 import Page from '../components/Page'
 import IndexLayout from '../layouts'
 import { dimensions } from '../styles/variables'
+import Header from '../components/Header'
 
 interface IndexProps {
   data: {
     datoCmsHome: {
       introText: string
+    }
+    datoCmsColor: {
+      myWork: {
+        hex: string
+      }
     }
   }
 }
@@ -24,11 +30,21 @@ const Container = styled.div`
 
 const IndexPage = ({ data }: IndexProps) => {
   return (
-    <IndexLayout>
-      <Page>
-        <Container dangerouslySetInnerHTML={{ __html: data.datoCmsHome.introText }} />
-      </Page>
-    </IndexLayout>
+    <IndexLayout
+      header={
+        <Header
+          colors={{
+            headerBg: 'white',
+            headerColor: data.datoCmsColor.myWork.hex
+          }}
+        />
+      }
+      content={
+        <Page>
+          <Container dangerouslySetInnerHTML={{ __html: data.datoCmsHome.introText }} />
+        </Page>
+      }
+    />
   )
 }
 
@@ -38,6 +54,11 @@ export const query = graphql`
   query MyQuery {
     datoCmsHome {
       introText
+    }
+    datoCmsColor {
+      myWork {
+        hex
+      }
     }
   }
 `
